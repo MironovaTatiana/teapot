@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace Teapot
 {
@@ -16,27 +16,29 @@ namespace Teapot
         /// <summary>
         /// Встать
         /// </summary>
-        public void WakeUp()
+        public async Task WakeUpAsync()
         {
             Console.WriteLine("Встать");
         }
 
         /// <summary>
-        /// Поставить чайник
-        /// </summary>
-        public void TurnOnTeapot()
-        {
-            Console.WriteLine("Поставили чайник");
-            Thread.Sleep(60);
-            Console.WriteLine("Чайник вскипел");
-        }
-
-        /// <summary>
         /// Сделать чай
         /// </summary>
-        public void MakeTea()
+        public async Task MakeTeaAsync()
         {
-            Console.WriteLine("Чай налит");
+            Console.WriteLine("Поставили чайник");
+
+            var teapot = new Teaport.Teapot();
+            var isHotWater = Task.Factory.StartNew(() => teapot.BoilAsync());
+            var phone = new Phone();
+            var task = Task.Factory.StartNew(() => phone.CallAsync());
+
+            if (await isHotWater.Result)
+            {
+                Console.WriteLine("Чай налит");
+            }
+
+            task.Wait();
         }
     }
 }

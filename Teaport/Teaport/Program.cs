@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace Teapot
+﻿namespace Teapot
 {
     class Program
     {
@@ -9,7 +6,7 @@ namespace Teapot
         {
             var person = new Service();
 
-            person.Work();
+            person.WorkAsync();
         }
     }
 }

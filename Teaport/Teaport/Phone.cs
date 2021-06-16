@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace Teapot
 {
@@ -11,10 +11,10 @@ namespace Teapot
         /// <summary>
         /// Звонок телефона
         /// </summary>
-        public void Call()
+        public async Task CallAsync()
         {
             Console.WriteLine("Начало звонка");
-            Thread.Sleep(100);
+            Task.Delay(100).Wait();
             Console.WriteLine("Звонок завершен");
         }
     }
